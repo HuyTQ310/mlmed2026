@@ -1,6 +1,5 @@
-USTH Machine Learning in Medicine 2026
-==================================
+# USTH Machine Learning in Medicine 2026
 
-* Your name here
-* Your ID here
+* Tran Quang Huy
+* 23BI14196
 * Your team ID here
