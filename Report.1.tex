@@ -1,0 +1,45 @@
+\documentclass[twocolumn]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{ECG Heartbeat Categorization}
+\author{Huy Tran Quang -- 2BI14196}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this report, we will take a look at the ECG Heartbeat Categorization Dataset and perform a simple machine learning model on it. The result will be analyzed and compared with "ECG Heartbeat Classification: A Deep Transferable Representation" conducted by Mohammad Kachuee, Shayan Fazeli and Majid Sarrafzadeh.
+
+\section{Data Exploration}
+
+\subsection{Dataset Description}
+This dataset is composed of two collections of heartbeat signals derived from two famous datasets in heartbeat classification, the MIT-BIH Arrhythmia Dataset and The PTB Diagnostic ECG Database. The number of samples in both collections is large enough for training a deep neural network.
+
+This dataset has been used in exploring heartbeat classification using deep neural network architectures, and observing some of the capabilities of transfer learning on it. The signals correspond to electrocardiogram (ECG) shapes of heartbeats for the normal case and the cases affected by different arrhythmias and myocardial infarction. These signals are preprocessed and segmented, with each segment corresponding to a heartbeat.
+
+\subsection{Data Structure}
+This dataset has 87554 rows and 188 columns, the first 187 columns are the heartbeat values, and the last column is the classification of the heartbeat.
+
+\section{Methodology: k-Nearest Neighbors Model}
+
+\subsection{k-Nearest Neighbors Algorithm}
+In essence, a row will be treated as a point in a 187-dimensional space. To classify a new entry, nearest points of the entry will be found using euclidean distance calculation, from which a fitting label will be chosen via voting.
+
+\subsection{Model Implementation}
+The dataset is divided into 70043 training rows and 17511 testing rows, creating an approximate 80/20 ratio. After testing with different values of k ranging from 3 to 5, the accuracy achieved is approximately 0.1387. The low accuracy suggests that you should not use k-Nearest Neighbors.
+
+\section{Comparison with the Original Paper}
+
+\subsection{The Approach}
+Mohammad Kachuee, Shayan Fazeli, Majid Sarrafzadeh proposed a method based on deep convolutional neural networks for the classification of heartbeats which is able to accurately classify five different arrhythmias in accordance with the AAMI EC57 standard
+
+\subsection{Results Comparison}
+According to the results, the suggested method is able to make predictions with the average accuracies of 0.934, which is a little bit better than our, yes OUR result.
+
+\section{Conclusion}
+It is evident that deep learning models are superior to the classical machine learning models. However, everything comes with a cost, in this case, high computational cost and extensive water usage, ultimately contributing to polar bears becoming homeless.
+
+\end{document}
