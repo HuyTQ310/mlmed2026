@@ -1,0 +1,49 @@
+\documentclass[twocolumn]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Measurement of Fetal head circumference using Ultrasound}
+\author{Huy Tran Quang -- 2BI14196}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this report, we will attempt to automate measurement of fetal head circumference using 2D ultrasound images. The result will be analyzed and compared with the Leaderboard on Grand Challenge.
+
+\section{Data Exploration}
+
+\subsection{Dataset Description}
+Ultrasound imaging is used to measure the head circumference (HC) of a fetus, which can be used to estimate the age and monitor the growth. The measuring process can be done by segmenting the head of the fetus and manually measure the circumference, however we can automate this by using a deep learning model, trained from a pre-measured dataset, to estimate the head circumference.
+
+\subsection{Data Structure}
+This dataset has a csv file containing the measurements and a folder containing the ultrasound images, both contain 999 samples. The head circumference samples range from 44.3 mm to 346.4 mm, such difference can be explained by fetuses being in different development stages. As for the ultrasound images, they look a little freaky and we are better off not looking and commenting on them.
+
+\section{Methodology: CNN}
+
+\subsection{Convolutional Neural Network}
+A Convolutional Neural Network has two stages, Convolution and Neural Network. 
+In the Convolution stage, the CNN applies multiple filters that transform the image into transformed images, or feature maps. During training, the filter's values are adjusted to help reduce the prediction error.
+In the Neural Network stage, the feature maps are flatten, connected together and passed through a neural network, which combine these features using learned weights to produce the final output.
+
+\subsection{Model Implementation}
+The inputs are the ultrasound images, which have a resolution of 540x800 that we resized to 270x400 to reduce computational cost. The outputs are head circumference values in millimeters. The dataset was split into 0.8 training data (799 images) and 0.2 testing data (200 images).
+
+Two convolutional layers were used, 8 filters (size 3x3) on the first and 16 on the second, to extract features such as edges and shape cues from the ultrasound images. Max-pooling layers (size 2x2) are applied after each convolution to reduce size and computational cost. A flattening layer converts the feature maps into a one-dimensional feature vector. Last but not least fully connected (dense) layers, the neural network, combine the extracted features to produce a final regression output. The model was trained using Mean Absolute Error (MAE) as the loss function, a batch size of 16 and 10 training epochs.
+
+On unseen data, the model produce a MAE value of 30.25931167602539 mm, which means on average the prediction was off by 30mm which in my opinion is pretty good.
+
+\section{Comparison with the Leaderboard}
+
+\subsection{The Approach}
+The top-performing method on the HC18 leaderboard adopts a different approach from ours, they first segment the fetal head using an U-Net model then compute the circumference through geometric measurement. Over a 1000 epochs were used so you know they're cooking up something big.
+
+\subsection{Results Comparison}
+According to the results, the suggested method is able to achieve sub-millimeter errors, a Test MAE of 0.74 with 0.73 mm more or less, which is a little bit better than our, yes OUR result.
+
+\section{Conclusion}
+It is evident that different approaches can yield vastly different result. It is highly suggested that junior researchers use different methods to approach a problem or task.
+
+\end{document}
