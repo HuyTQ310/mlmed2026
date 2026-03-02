@@ -1,0 +1,114 @@
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+
+\title{\textbf{Practical Work 3: Segmentation of COVID-19 X-ray Images}}
+\author{Tran Quang Huy - 23BI14196}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Image segmentation has a crucial role in medical diagnosis. For example, during the COVID-19 pandemic, automatic detection and segmentation tools are essential for doctors to indentify and treat infected lung areas.
+
+In this practical work, we attempted to segment infected regions of COVID-QU-Ex dataset \cite{covid_qu_ex} using the U-Net architecture. The implementation follows the tutorial by PyImageSearch \cite{pyimagesearch_unet}, which was also introduced in our Introduction to Deep Learning course.
+
+\section{Dataset Description}
+
+The COVID-QU-Ex dataset contains chest X-ray images of COVID-19 patients along with corresponding infection masks.
+
+We resized all images to 256 x 256 and converted to grayscale. 
+Pixel intensities were normalized to the range [0,1].
+
+The number of training images are 1864, and 466 for validation images.
+
+\section{Methodology}
+
+\subsection{U-Net Architecture}
+
+We implemented an U-Net architecture, more details can be found in the link below, and all credits go to Margaret Maynard-Reid. 
+
+In a nutshell, segmentation model like U-Net learns to classify and predict each pixel, but in training each pixels won't be treated individually but together in order to get all the context from the image.
+
+\subsection{Training Details}
+
+    We used a batch size of 8 and a number epoch of 20. Training with a high number of epochs will demonstrate accurately the capability of the U-Net architecture.
+
+\section{Experiments and Results}
+
+\subsection{Training Performance}
+
+After training for 20 epochs:
+
+\begin{itemize}
+    \item Final Training Accuracy: \textbf{92\%}
+    \item Final Validation Accuracy: \textbf{92\%}
+    \item Final Training Loss: \textbf{0.17}
+    \item Final Validation Loss: \textbf{0.15}
+\end{itemize}
+
+Good results overall.
+
+\subsection{Qualitative Results}
+
+Figure~\ref{fig:results} shows example segmentation outputs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2026-03-02 194405.png}
+    \caption{Input image, real mask, and predicted mask.}
+    \label{fig:results}
+\end{figure}
+
+The model successfully show that there are infection regions, although not entirely accurate.
+
+\section{Comparison with State of the Art}
+
+A study using an advanced U-Net variant\cite{optimizedUnet} net a results of: 
+
+\begin{itemize}
+    \item Mean Intersection over Union: \textbf{82.72\%}
+    \item Mean Dice Coefficient: \textbf{78.37\%}
+    \item Accuracy: \textbf{95.17\%}
+\end{itemize}
+
+Compared to this, our implementation
+used a relatively simple U-Net. While it performed reasonable
+well, it may not reach the performance of more advanced architectures.
+
+\section{Conclusion}
+
+In this practical work, we implemented a segmentation model 
+for COVID-19 infection detection in X-ray images using simple U-Net architecture. 
+
+The model successfully learned to identify infection regions and demonstrated the usefulness of automatic segmentation tools in medical imaging tasks.
+
+\begin{thebibliography}{9}
+
+\bibitem{covid_qu_ex}
+COVID-QU-Ex, 
+``consists of 33,920 chest X-ray (CXR) images'' 
+Available at: \url{https://www.kaggle.com/datasets/anasmohammedtahir/covidqu}
+
+\bibitem{pyimagesearch_unet}
+PyImageSearch, 
+``U-Net Image Segmentation in Keras,'' 
+Available at: \url{https://pyimagesearch.com/2022/02/21/u-net-image-segmentation-in-keras/}
+
+\bibitem{optimizedUnet}
+Optimized attention U-Net for enhanced lung and area of infection segmentation in chest X-Rays and CT scans. 
+Available at: \url{https://www.sciencedirect.com/science/article/pii/S1687850725003620?utm_source=chatgpt.com}
+
+\end{thebibliography}
+
+\end{document}
